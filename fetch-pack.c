@@ -1181,7 +1181,7 @@ static struct ref *do_fetch_pack(struct fetch_pack_args *args,
 		server_supports_filtering = 1;
 		print_verbose(args, _("Server supports %s"), "filter");
 	} else if (args->filter_options.choice) {
-		warning("filtering not recognized by server, ignoring");
+		die(_("Server does not support filtering"));
 	}
 
 	if (server_supports("deepen-since")) {
@@ -1382,7 +1382,7 @@ static int send_fetch_request(struct fetch_negotiator *negotiator, int fd_out,
 
 	/* Add filter */
 	send_filter(args, &req_buf,
-		    server_supports_feature("fetch", "filter", 0));
+		    server_supports_feature("fetch", "filter", 1));
 
 	if (server_supports_feature("fetch", "packfile-uris", 0)) {
 		int i;
