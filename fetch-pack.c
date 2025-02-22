@@ -1382,7 +1382,7 @@ static int send_fetch_request(struct fetch_negotiator *negotiator, int fd_out,
 
 	/* Add filter */
 	send_filter(args, &req_buf,
-		    server_supports_feature("fetch", "filter", 0));
+		    server_supports_feature("fetch", "filter", 1));
 
 	if (server_supports_feature("fetch", "packfile-uris", 0)) {
 		int i;
